@@ -110,6 +110,9 @@ try {
   echo "Downloading CIPD client for $Platform from $URL..."
   $wc = (New-Object System.Net.WebClient)
   $wc.Headers.Add("User-Agent", $UserAgent)
+  if ($env:https_proxy) {
+    $wc.Proxy = New-Object System.Net.WebProxy($env:https_proxy)
+  }
   try {
     $wc.DownloadFile($URL, $TmpPath)
   } catch {

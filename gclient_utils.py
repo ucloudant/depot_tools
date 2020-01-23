@@ -1154,6 +1154,8 @@ def DefaultIndexPackConfig(url=''):
   result = ['-c', 'core.deltaBaseCacheLimit=%s' % cache_limit]
   if url in THREADED_INDEX_PACK_BLACKLIST:
     result.extend(['-c', 'pack.threads=1'])
+  if 'https_proxy' in os.environ:
+    result.extend(['-c', 'http.proxy=%s' % os.environ['https_proxy']])
   return result
 
 
